@@ -21,4 +21,6 @@ with open("tg_ref_posts.csv", mode="w", encoding='utf-8') as w_file:
         for post_link in post_links:
             host_owner = parser.get_host_owner(post_link)
         if len(ref_links) != 0:
-            file_writer.writerow({"id": id, "content": content, "post_date": post_date, "link": link, "ref_links": ref_links, "whois_info": host_owner})
+            file_writer.writerow(
+                {"id": id, "content": content, "post_date": post_date, "link": link, "ref_links": ref_links,
+                 "whois_info": host_owner})
