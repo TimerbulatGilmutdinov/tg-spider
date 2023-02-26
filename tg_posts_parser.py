@@ -1,6 +1,9 @@
 import json
 import subprocess
 import re
+import whois
+
+from urllib.parse import urlparse
 
 import final_link_resolver
 
@@ -77,3 +80,12 @@ def get_post_ref_links(line):
         if len(matches) != 0:
             ref_links.append(matches)
     return ref_links
+
+
+
+def get_host_owner(link):
+    main_domain = urlparse(link).hostname
+    main_domain = ".".join(main_domain.split(".")[-2:])
+    w = whois.whois(main_domain)
+    company = w.get("org", "")
+    return company
