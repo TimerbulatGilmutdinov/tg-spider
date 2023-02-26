@@ -7,6 +7,7 @@ from urllib.parse import urlparse
 
 import final_link_resolver
 
+
 # cmd = '''snscrape --jsonl --since 2022-01-01 telegram-channel wylsared > wylsared.txt'''
 # args_list = cmd.split(" ")
 # process = subprocess.run(args_list, shell=True)
@@ -80,7 +81,6 @@ def get_post_ref_links(line):
         if len(matches) != 0:
             ref_links.append(matches)
     return ref_links
-
 
 
 def get_host_owner(link):
