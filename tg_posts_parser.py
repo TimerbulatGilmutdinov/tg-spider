@@ -6,7 +6,7 @@ from urllib.parse import urlparse
 
 import final_link_resolver
 
-utm_pattern = r'https:\/\/\S+\.\S+\/\?utm_source=\S+'
+utm_pattern = r'https?:\/\/\S+\?(?:(?:amp;)?|\b)(?:ref|referer|referal|promo|promocode|coupon|code|invite|invited_by|friend|source|partner|utm_\w+)=\S+'
 
 data = open('wylsared.txt')
 
@@ -71,9 +71,10 @@ def get_post_ref_links(line):
     ref_links = []
 
     for link in links_list:
-        matches = re.findall(utm_pattern, link)
-        if len(matches) != 0:
-            ref_links.append(matches)
+        if "utm_source=telegram&amp" not in link:
+            matches = re.findall(utm_pattern, link)
+            if len(matches) != 0:
+                ref_links.append(matches)
     return ref_links
 
 
@@ -82,4 +83,6 @@ def get_host_owner(link):
     main_domain = ".".join(main_domain.split(".")[-2:])
     w = whois.whois(main_domain)
     company = w.get("org", "")
+    if company is None or company == "":
+        company = main_domain
     return company

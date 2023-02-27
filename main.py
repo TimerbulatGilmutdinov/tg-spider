@@ -7,7 +7,7 @@ channel_name = input()
 print('Input a .txt source file name where you will store parsed posts info')
 source_file = input()
 
-cmd = 'snscrape --jsonl --since 2023-01-01 telegram-channel %s > %s' % (channel_name, source_file)
+cmd = 'snscrape --jsonl --since 2022-01-01 telegram-channel %s > %s' % (channel_name, source_file)
 args_list = cmd.split(" ")
 process = subprocess.run(args_list, shell=True)
 
