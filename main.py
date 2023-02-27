@@ -16,6 +16,8 @@ process = subprocess.run(args_list, shell=True)
 print('Input target .csv file name')
 target_file = input()
 csv_executor.create_csv(target_file, source_file)
+
+# firstly you need to configure your database in file database_executor.py
 database_executor.fill_data_base(source_file)
 
 
