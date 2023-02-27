@@ -83,6 +83,8 @@ def get_host_owner(link):
     main_domain = ".".join(main_domain.split(".")[-2:])
     w = whois.whois(main_domain)
     company = w.get("org", "")
-    if company is None or company == "":
+    if company is None:
         company = main_domain
+    if company == "":
+        company = final_link_resolver.get_domain_of_ref(link)
     return company
