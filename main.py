@@ -1,38 +1,22 @@
-import tg_posts_parser as parser
 import subprocess
+import csv_executor
+import database_executor
 
-# You can put any other telegram channel name instead of 'wylsared', also you can choose
-# any file name you want, choose period of time
-cmd = '''snscrape --jsonl --since 2022-01-01 telegram-channel wylsared > wylsared.txt'''
+print('Input a channel name, for example : @durov, - its name "durov"')
+channel_name = input()
+print('Input a .txt source file name where you will store parsed posts info')
+source_file = input()
+
+cmd = 'snscrape --jsonl --since 2023-01-01 telegram-channel %s > %s' % (channel_name, source_file)
 args_list = cmd.split(" ")
 process = subprocess.run(args_list, shell=True)
 
-# Example of getting all links from all the posts you have chosen to parse
-links = parser.get_all_links()
-print(links)
-
-# Example of getting all domains of the links
-domains = parser.get_all_domains(links)
-print(domains)
-
-# For using other functions you need to load your file line by line
-data = open('wylsared.txt')
-data_lines = data.readlines()
-
-# Simple example of using parser
-for line in data_lines:
-    print(parser.get_post_link(line))
-    print(parser.get_post_ref_links(line))
-    print(parser.get_post_text(line))
-    print(parser.get_post_date(line))
-
-    # This one is working slowly because it uses external web-service
-    print(parser.get_host_owner(line))
-
-
-
-
-
+# first arg - target file, second arg - source file
+# for example 'tg_posts.csv', 'durov.txt'
+print('Input target .csv file name')
+target_file = input()
+csv_executor.create_csv(target_file, source_file)
+database_executor.fill_data_base(source_file)
 
 
 
