@@ -36,9 +36,9 @@ def fill_data_base(source_file):
         post_links = parser.get_all_post_links(line)
         host_owner = ""
 
-        for post_link in post_links:
-            host_owner = parser.get_host_owner(post_link)
         if len(ref_links) != 0:
+            for post_link in post_links:
+                host_owner = parser.get_host_owner(post_link)
             cur.execute('''
             INSERT INTO tg_posts (content, post_date, link, ref_links, whois_info) values (%s, %s, %s, %s, %s)
             ''', (content, post_date, link, ref_links, host_owner))
