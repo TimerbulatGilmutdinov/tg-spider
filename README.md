@@ -12,4 +12,5 @@ In file using_example.py there are some examples of using this parser
 
 How to get started? 
 1. Choose telegram-channel and it's name: @example, - channel's name 'example'
-2. Run file main.py
+2. pip install snscrape
+3. run main.py
